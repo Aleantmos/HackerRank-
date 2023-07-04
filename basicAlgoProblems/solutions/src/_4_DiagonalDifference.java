@@ -25,7 +25,28 @@ public class _4_DiagonalDifference {
             }
         }
 
-        sumIterative(n, matrix);
+        System.out.println(getDiagonalDiff(matrix));
+        //sumIterative(n, matrix);
+    }
+
+    private static int getDiagonalDiff(List<List<Integer>> matrix) {
+      return Math.abs(diagonalSum(matrix, 0 ,0) - reverseDiagonalSum(matrix, 0, matrix.size() - 1));
+    }
+
+    private static int reverseDiagonalSum(List<List<Integer>> matrix, int row, int col) {
+        if (row == matrix.size() || col < 0) {
+            return 0;
+        }
+
+        return matrix.get(row).get(col) + reverseDiagonalSum(matrix, row + 1, col - 1);
+    }
+
+    private static int diagonalSum(List<List<Integer>> matrix, int row, int col) {
+        if (row == matrix.size() || col == matrix.size() ) {
+            return 0;
+        }
+        
+        return matrix.get(row).get(col) + diagonalSum(matrix, row + 1, col + 1);
     }
 
     private static void sumIterative(Integer n, List<List<Integer>> matrix) {
